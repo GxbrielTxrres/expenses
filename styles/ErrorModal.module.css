@@ -1,0 +1,117 @@
+.errorContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+
+.errorWrapper {
+  max-width: 600px;
+  height: 350px;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background: #2c3e50; /* fallback for old browsers */
+  background: -webkit-linear-gradient(270deg, #fd746c, #2c3e50);
+  background: linear-gradient(270deg, #fd746c, #2c3e50);
+  background-size: 200% 200%;
+  border-radius: 20px;
+
+  -webkit-animation: fadeBg 28s ease infinite;
+  -moz-animation: fadeBg 28s ease infinite;
+  -o-animation: fadeBg 28s ease infinite;
+  animation: fadeBg 28s ease infinite;
+}
+
+.header {
+  font-size: 5rem;
+}
+
+.paragraph {
+  font-size: 2rem;
+}
+
+.errorBtn {
+  border-radius: 10px;
+  font-size: 2rem;
+  padding: 3px 25px;
+  border: 2px solid white;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: transparent;
+}
+
+.errorBtn:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .errorBtn {
+    font-size: 1rem;
+  }
+  .paragraph {
+    font-size: 1rem;
+  }
+  .header {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .header {
+    font-size: 4rem;
+  }
+  .paragraph {
+    font-size: 2rem;
+  }
+}
+
+@-webkit-keyframes fadeBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-moz-keyframes fadeBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@-o-keyframes fadeBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes fadeBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
