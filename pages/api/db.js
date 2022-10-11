@@ -9,11 +9,17 @@ export default async (req, res) => {
   let posts = await db.collection("deposits");
   if (req.method === "POST") {
     let data = {
-      depositOne: req.body.depositOne,
-      id: Date.now(),
+      deposit: req.body.deposit,
       date: date,
       price: req.body.price,
       withdraw: req.body.withdraw,
+      savings: req.body.savings,
+      id: Date.now(),
+      total:
+        Number(req.body.deposit) -
+        Number(req.body.price) -
+        Number(req.body.withdraw) +
+        Number(req.body.savings),
     };
 
     await posts.insertOne(data);

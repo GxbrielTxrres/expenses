@@ -3,19 +3,28 @@ import * as React from "react";
 import styles from "../styles/Home.module.css";
 import Datagrid from "./datagrid";
 const Inputs = (props) => {
-  const [depositOne, setDepositOne] = useState("");
+  const [deposit, setDeposit] = useState("");
   const [price, setPrice] = useState("");
   const [withdraw, setWithdraw] = useState("");
   const [tableData, setTableData] = useState(props.data);
+  const [savings, setSavings] = useState("");
+  const [total, setTotal] = useState(props.total);
+
+  const resetInputs = () => {
+    setWithdraw("");
+    setPrice("");
+    setDeposit("");
+    setSavings("");
+  };
 
   const updateFinances = async () => {
-    if (!(depositOne && price && withdraw) > 0) {
+    if (!(deposit && price && withdraw) > 0) {
       props.handleOpen();
     }
 
     const res = await fetch("/api/db", {
       method: "POST",
-      body: JSON.stringify({ depositOne, withdraw, price }),
+      body: JSON.stringify({ deposit, withdraw, price, savings }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -23,6 +32,7 @@ const Inputs = (props) => {
     const data = await res.json();
     console.log(data);
     setTableData(data);
+    resetInputs();
   };
 
   {
@@ -30,14 +40,14 @@ const Inputs = (props) => {
       <div>
         <Datagrid tableData={tableData} />
         <div style={{ width: 400, display: "inline", marginRight: 20 }}>
-          <label htmlFor="depositOne">Deposit: </label>
+          <label htmlFor="deposit">Deposit: </label>
           <input
             type="text"
-            name="depositOne"
-            value={depositOne}
+            name="deposit"
+            value={deposit}
             placeholder="Enter Exact Amount..."
             onChange={(e) => {
-              setDepositOne(e.target.value);
+              setDeposit(e.target.value);
             }}
           />
         </div>
@@ -62,6 +72,18 @@ const Inputs = (props) => {
             placeholder="Enter Exact Amount..."
             onChange={(e) => {
               setWithdraw(e.target.value);
+            }}
+          />
+        </div>
+        <div style={{ width: 400, display: "inline", marginRight: 20 }}>
+          <label htmlFor="savings">Savings: </label>
+          <input
+            type="text"
+            name="savings"
+            value={savings}
+            placeholder="Enter Exact Amount..."
+            onChange={(e) => {
+              setSavings(e.target.value);
             }}
           />
         </div>

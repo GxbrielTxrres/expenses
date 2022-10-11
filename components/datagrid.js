@@ -10,7 +10,7 @@ const Datagrid = (props) => {
       editable: false,
     },
     {
-      field: "depositOne",
+      field: "deposit",
       headerName: "Deposit",
       width: 250,
       editable: false,
