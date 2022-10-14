@@ -39,6 +39,12 @@ const Datagrid = (props) => {
       width: 150,
       editable: false,
     },
+    {
+      field: "totalSavings",
+      headerName: "Total Savings",
+      width: 150,
+      editable: false,
+    },
   ];
 
   return (

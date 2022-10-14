@@ -8,7 +8,6 @@ const Inputs = (props) => {
   const [withdraw, setWithdraw] = useState("");
   const [tableData, setTableData] = useState(props.data);
   const [savings, setSavings] = useState("");
-  const [total, setTotal] = useState(props.total);
 
   const resetInputs = () => {
     setWithdraw("");
@@ -30,7 +29,6 @@ const Inputs = (props) => {
       },
     });
     const data = await res.json();
-    console.log(data);
     setTableData(data);
     resetInputs();
   };
@@ -45,7 +43,7 @@ const Inputs = (props) => {
             type="text"
             name="deposit"
             value={deposit}
-            placeholder="Enter Exact Amount..."
+            placeholder="Enter $ Amount..."
             onChange={(e) => {
               setDeposit(e.target.value);
             }}
@@ -57,7 +55,7 @@ const Inputs = (props) => {
             type="text"
             name="price"
             value={price}
-            placeholder="Enter Exact amount..."
+            placeholder="Enter $ amount..."
             onChange={(e) => {
               setPrice(e.target.value);
             }}
@@ -69,7 +67,7 @@ const Inputs = (props) => {
             type="text"
             name="withdraw"
             value={withdraw}
-            placeholder="Enter Exact Amount..."
+            placeholder="Enter $ Amount..."
             onChange={(e) => {
               setWithdraw(e.target.value);
             }}
@@ -81,7 +79,7 @@ const Inputs = (props) => {
             type="text"
             name="savings"
             value={savings}
-            placeholder="Enter Exact Amount..."
+            placeholder="Enter $ Amount..."
             onChange={(e) => {
               setSavings(e.target.value);
             }}
