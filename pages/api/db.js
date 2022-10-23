@@ -19,7 +19,7 @@ export default async (req, res) => {
 
   const allSavings = expenses.map((last) => last.totalSavings);
   const lastSaving = allSavings[allSavings.length - 1];
-  console.log(lastTotal, lastSaving);
+  console.log(lastTotal, lastSaving, totals[0]);
   savingsArr.push(lastSaving);
 
   if (req.method === "POST") {
@@ -31,7 +31,7 @@ export default async (req, res) => {
       savings: req.body.savings,
       id: Date.now(),
       total:
-        totals.length === 1 && lastTotal === undefined
+        totals.length === 1 && totals[0] === undefined
           ? Number(req.body.deposit) -
             Number(req.body.savings) -
             Number(req.body.withdraw) -
@@ -42,7 +42,7 @@ export default async (req, res) => {
             Number(req.body.price) +
             totals.pop(),
       totalSavings:
-        savingsArr.length === 1 && lastSaving === undefined
+        savingsArr.length === 1 && savingsArr[0] === undefined
           ? Number(req.body.savings)
           : Number(req.body.savings) + savingsArr.pop(),
     };
