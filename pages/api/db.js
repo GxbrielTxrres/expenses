@@ -1,15 +1,26 @@
 import clientPromise from "../../lib/mongoDB";
 
+const date = Date().slice(4, 16);
 let totals = [];
 let savingsArr = [];
 
 export default async (req, res) => {
+  //connect to db
   const client = await clientPromise;
-  const date = Date().slice(4, 16);
-
   const db = await client.db("expenses");
+  let deposits = await db.collection("deposits");
 
-  let posts = await db.collection("deposits");
+  //get totals then push it to totals
+  const expenses = await db.collection("deposits").find({}).toArray();
+
+  const allTotals = expenses.map((last) => last.total);
+  const lastTotal = allTotals[allTotals.length - 1];
+  totals.push(lastTotal);
+
+  const allSavings = expenses.map((last) => last.totalSavings);
+  const lastSaving = allSavings[allSavings.length - 1];
+  console.log(lastTotal, lastSaving);
+  savingsArr.push(lastSaving);
 
   if (req.method === "POST") {
     let data = {
@@ -20,7 +31,7 @@ export default async (req, res) => {
       savings: req.body.savings,
       id: Date.now(),
       total:
-        totals.length === 0
+        totals.length === 1 && lastTotal === undefined
           ? Number(req.body.deposit) -
             Number(req.body.savings) -
             Number(req.body.withdraw) -
@@ -31,19 +42,17 @@ export default async (req, res) => {
             Number(req.body.price) +
             totals.pop(),
       totalSavings:
-        savingsArr.length === 0
+        savingsArr.length === 1 && lastSaving === undefined
           ? Number(req.body.savings)
           : Number(req.body.savings) + savingsArr.pop(),
     };
     savingsArr.push(data.totalSavings);
     totals.push(data.total);
 
-    await posts.insertOne(data);
+    await deposits.insertOne(data);
 
-    posts = await db.collection("deposits").find({}).toArray();
+    deposits = await db.collection("deposits").find({}).toArray();
 
-    return res.status(200).json(posts);
+    return res.status(200).json(deposits);
   }
-  posts = await db.collection("deposits").find({}).toArray();
-  return res.status(200).json(posts);
 };
