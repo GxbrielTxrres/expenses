@@ -19,6 +19,7 @@ const Inputs = (props) => {
   const updateFinances = async () => {
     if (!(deposit && price && withdraw) > 0) {
       props.handleOpen();
+      return;
     }
 
     const res = await fetch("/api/db", {
