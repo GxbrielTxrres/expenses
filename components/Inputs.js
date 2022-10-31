@@ -50,7 +50,7 @@ const Inputs = (props) => {
           />
         </div>
         <div style={{ width: 400, display: "inline", marginRight: 20 }}>
-          <label htmlFor="price">Price: </label>
+          <label htmlFor="price">Spent: </label>
           <input
             type="text"
             name="price"
